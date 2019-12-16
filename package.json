@@ -1,0 +1,14 @@
+{
+  "name": "expense-sheet-generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ayrbox <srdx7@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {},
+  "scripts": {
+    "start": "rm doc.xlsx && node src/index.js"
+  },
+  "dependencies": {
+    "excel4node": "^1.7.2"
+  }
+}
