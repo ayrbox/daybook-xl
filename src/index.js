@@ -1,32 +1,27 @@
-const xl = require('excel4node');
 
 
 const items = require('./expense-items');
 
 
+const { workbook, worksheet } = require('./workbook');
+const generateMonthlySheet = require('./generateMonthlySheet');
 
 
-
-const wb = new xl.Workbook();
-const ws = wb.addWorksheet('Sheet 1');
-
-
-var style = wb.createStyle({
+const headerStyle = workbook.createStyle({
   font: {
-    color: '#FF0800',
-    size: 12,
+    bold: true,
   },
   numberFormat: '£#,##0.00; (£#,##0.00); -',
 });
 
-ws.cell(1, 1)
+worksheet.cell(1, 1)
   .string('December')
-  .style(style);
+  .style(headerStyle);
 
 
 const headerRowIndex = 1;
 items.forEach((item, idx) => {
-  ws.cell(headerRowIndex, idx + 2)
+  worksheet.cell(headerRowIndex, idx + 2)
     .string(item.name)
     .style({ font: { size: 14 }});
 });
@@ -43,9 +38,8 @@ const end = new Date(endDate) //clone
 let rowIdx = headerRowIndex;
 while(end >= start) {
   rowIdx += 1;
-  ws.cell(rowIdx, 1)
+  worksheet.cell(rowIdx, 1)
     .date(start);
-
   start.setDate(start.getDate() + 1);
 }
 
@@ -53,38 +47,18 @@ const cols = ['B', 'C', 'D']
 const totalRowIdx = rowIdx + 1;
 items.forEach((item, idx) => {
   const c = cols[idx];
-  ws.cell(totalRowIdx, idx + 2)
+  worksheet.cell(totalRowIdx, idx + 2)
     .formula(`SUM(${c}${headerRowIndex+1}:${c}${rowIdx})`)
+});
+
+
+let lastRow = 32; 
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].forEach(m => {
+  lastRow = generateMonthlySheet(m, 2020, lastRow + 2);
 });
 
 
 
 
-
-
-// ws.cell(1, 1)
-//   .number(100)
-//   .style(style);
  
-// // Set value of cell B1 to 200 as a number type styled with paramaters of style
-// ws.cell(1, 2)
-//   .number(200)
-//   .style(style);
- 
-// // Set value of cell C1 to a formula styled with paramaters of style
-// ws.cell(1, 3)
-//   .formula('SUM(A1:B1)')
-//   .style(style);
- 
-// // Set value of cell A2 to 'string' styled with paramaters of style
-// ws.cell(2, 1)
-//   .string('string')
-//   .style(style);
- 
-// // Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-// ws.cell(3, 1)
-//   .bool(true)
-//   .style(style)
-//   .style({font: {size: 14}});
- 
-wb.write('doc.xlsx');
+workbook.write('doc.xlsx');
