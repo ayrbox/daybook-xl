@@ -42,8 +42,8 @@ function generateMonthlySheet(monthIndex, yearIndex, rowIndex = 1) {
             .style(headerStyle);
     });
 
-    const startDate = new Date(yearIndex, monthIndex, 1);
-    const endDate = new Date(yearIndex, monthIndex + 1, 0); // get correct end date
+    const startDate = Date.UTC(yearIndex, monthIndex, 1);
+    const endDate = Date.UTC(yearIndex, monthIndex + 1, 0); // get correct end date
 
     const start = new Date(startDate) //clone
     const end = new Date(endDate) //clone 
