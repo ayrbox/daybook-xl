@@ -1,6 +1,6 @@
 const items = require('./expense-items');
 const { workbook, worksheet } = require('./workbook');
-const { MONTHS, COLUMNS, EMPTY_LINES } = require('./constants');
+const { MONTHS, COLUMNS } = require('./constants');
 
 var headerStyle = workbook.createStyle({
   font: {
@@ -72,7 +72,7 @@ function generateMonthlySheet(monthIndex, yearIndex, rowIndex = 1) {
             .style(totalStyle)
     });
 
-    return totalRowIdx + EMPTY_LINES; // Last Row of month
+    return totalRowIdx; // Last Row of month
 };
 
 
