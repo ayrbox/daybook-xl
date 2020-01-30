@@ -1,5 +1,4 @@
 
-
 const items = require('./expense-items');
 
 
@@ -52,9 +51,9 @@ items.forEach((item, idx) => {
 });
 
 
-let lastRow = 32; 
+let startRow = 32; 
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].forEach(m => {
-  lastRow = generateMonthlySheet(m, 2020, lastRow + 2);
+  startRow = generateMonthlySheet(m, 2020, startRow) + 1;
 });
 
 

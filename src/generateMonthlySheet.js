@@ -1,12 +1,29 @@
 const items = require('./expense-items');
 const { workbook, worksheet } = require('./workbook');
-const { MONTHS, COLUMNS } = require('./constants');
+const { MONTHS, COLUMNS, EMPTY_LINES } = require('./constants');
 
 var headerStyle = workbook.createStyle({
   font: {
     bold: true,
   },
+  border: {
+      bottom: { style: 'thin' },
+  }
 });
+
+var totalStyle = workbook.createStyle({
+    font: {
+        bold: true,
+    },
+    border: {
+        top: {
+            style: 'thin',
+        },
+        bottom: {
+            style: 'thin',
+        },
+    }
+})
 
 function generateMonthlySheet(monthIndex, yearIndex, rowIndex = 1) {
 
@@ -42,14 +59,20 @@ function generateMonthlySheet(monthIndex, yearIndex, rowIndex = 1) {
 
     // Monthly Sub Total
     const totalRowIdx = rowIdx + 1;
+    
+    worksheet.cell(totalRowIdx, 1)
+        .string('Monthly Total')
+        .style(totalStyle);
+
     items.forEach((_, idx) => {
         const columnIdx = idx + 1; // First column date
         const col = COLUMNS[columnIdx];
         worksheet.cell(totalRowIdx, idx + 2)
             .formula(`SUM(${col}${headerRowIndex+1}:${col}${rowIdx})`)
+            .style(totalStyle)
     });
 
-    return totalRowIdx; // Last Row of month
+    return totalRowIdx + EMPTY_LINES; // Last Row of month
 };
 
 

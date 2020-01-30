@@ -54,21 +54,24 @@ const COLUMNS = [
 ];
 
 const MONTHS = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
+    'January',
+    'February',
+    'March',
+    'April',
     'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
 ];
+
+const EMPTY_LINES = 1;
 
 module.exports = {
     COLUMNS,
     MONTHS,
+    EMPTY_LINES,
 };
