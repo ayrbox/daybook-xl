@@ -70,8 +70,19 @@ const MONTHS = [
 
 const EMPTY_LINES = 1;
 
+const WEEKDAY = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+];
+
 module.exports = {
     COLUMNS,
     MONTHS,
     EMPTY_LINES,
+    WEEKDAY,
 };
