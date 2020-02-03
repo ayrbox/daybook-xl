@@ -5,12 +5,28 @@ const grandTotal = require('./grandTotal');
 
 const totalRowIndexes = [];
 
+const fiscalMonths = [
+  { month: 3, year: 2020 },
+  { month: 4, year: 2020 },
+  { month: 5, year: 2020 },
+  { month: 6, year: 2020 },
+  { month: 7, year: 2020 },
+  { month: 8, year: 2020 },
+  { month: 9, year: 2020 },
+  { month: 10, year: 2020 },
+  { month: 11, year: 2020 },
+  { month: 0, year: 2021 },
+  { month: 1, year: 2021 },
+  { month: 2, year: 2021 },
+];
+
 let startRow = 1; 
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].forEach(m => {
-  const totalRowIndex = generateMonthlySheet(m, 2020, startRow);
+fiscalMonths.forEach(({ month, year }) => {
+  const totalRowIndex = generateMonthlySheet(month, year, startRow);
   totalRowIndexes.push(totalRowIndex);
   startRow = totalRowIndex + EMPTY_LINES + 1;
 });
+
 
 
 const grandTotalRowIdx = startRow;
