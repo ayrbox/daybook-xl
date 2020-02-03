@@ -8,18 +8,16 @@ function grandTotal(rowIndexes, startAt) {
         .string('Grand Total');
 
     items.forEach((_, idx) => {
-        const columnIdx = idx + 1;
+        const columnIdx = idx + 2;
         const col = COLUMNS[columnIdx];
 
         const f = rowIndexes.map((rowIdx) => `${col}${rowIdx}`);
 
-        worksheet.cell(startAt, idx + 2)
+        worksheet.cell(startAt, idx + 3)
             .formula(f.join('+'));
     });
 
     const TOTAL_COLUMN = 1 + items.length + 1;
-
-
 
 
     // Grand Total of Total Column
