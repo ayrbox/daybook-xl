@@ -23,7 +23,7 @@ var totalStyle = workbook.createStyle({
             style: 'thin',
         },
     }
-})
+});
 
 
 const DATE_COLUMN = 1; 
