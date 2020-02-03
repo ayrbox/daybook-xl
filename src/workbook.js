@@ -10,6 +10,7 @@ const workbook = new xl.Workbook({
 });
 
 const worksheet = workbook.addWorksheet('Expense Sheet');
+worksheet.column(2).freeze();
 
 module.exports = {
     workbook,
